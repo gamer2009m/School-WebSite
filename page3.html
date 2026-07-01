@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>SchoolPortal — Admin Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+    <link rel="stylesheet" href="page3.css" />
+</head>
+<body>
+<div class="admin-container">
+    <div class="admin-header">
+        <h1>
+            <i class="fas fa-user-cog"></i>
+            Admin Panel
+            <span class="badge">Redactor Only</span>
+        </h1>
+        <a href="page2.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </a>
+    </div>
+    <div class="admin-grid">
+        <div class="admin-card">
+            <h3><i class="fas fa-user-plus"></i> Add New User</h3>
+            <form id="addUserForm">
+                <div class="form-group">
+                    <label for="newUsername">Username</label>
+                    <input type="text" id="newUsername" placeholder="Enter username" required>
+                </div>
+                <div class="form-group">
+                    <label for="newPassword">Password</label>
+                    <input type="text" id="newPassword" placeholder="Enter password" value="demo123" required>
+                </div>
+                <div class="form-group">
+                    <label for="newRole">Role</label>
+                    <select id="newRole">
+                        <option value="Student">Student</option>
+                        <option value="Teacher">Teacher</option>
+                        <option value="Redactor">Redactor</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="newClass">Class (Students only)</label>
+                    <select id="newClass">
+                        <option value="">N/A</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary">
+                    <i class="fas fa-plus"></i> Add User
+                </button>
+                <div id="addUserMessage" class="message"></div>
+            </form>
+        </div>
+        <div>
+            <div class="admin-card" style="margin-bottom:1.5rem;">
+                <h3><i class="fas fa-chart-pie"></i> System Overview</h3>
+                <div class="stats-grid" id="statsGrid">
+                    <div class="stat-box">
+                        <div class="number" id="totalUsers">0</div>
+                        <div class="label">Total Users</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="number" id="totalStudents">0</div>
+                        <div class="label">Students</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="number" id="totalTeachers">0</div>
+                        <div class="label">Teachers</div>
+                    </div>
+                </div>
+            </div>
+            <div class="admin-card">
+                <h3><i class="fas fa-school"></i> Manage Classes</h3>
+                <div style="display:flex;gap:0.5rem;margin-bottom:1rem;">
+                    <input type="text" id="newClassName" placeholder="New class name" 
+                           style="flex:1;padding:0.6rem;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);color:#f1f5f9;">
+                    <button onclick="addClass()" class="btn-primary" style="padding:0.6rem 1.2rem;">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+                <div id="classList">
+                </div>
+                <div id="classMessage" class="message"></div>
+            </div>
+        </div>
+    </div>
+    <div class="admin-card" style="margin-top:2rem;">
+        <h3><i class="fas fa-users"></i> All Users</h3>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Role</th>
+                        <th>Class</th>
+                        <th style="text-align:right;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="userTableBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="page3.js"></script>
+</body>
+</html>

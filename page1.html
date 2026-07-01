@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>SchoolPortal — Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+    <link rel="stylesheet" href="page1.css" />
+</head>
+<body>
+    <div class="login-wrapper">
+        <div class="brand-panel">
+            <div>
+                <div class="logo-area">
+                    <span class="logo-icon"><i class="fas fa-graduation-cap"></i></span>
+                    <div>
+                        <div class="logo-text">School<span>Portal</span></div>
+                        <div class="tagline">Educational Management System</div>
+                    </div>
+                </div>
+                <div class="hero-text">
+                    <h2>Manage your <i>school</i> life,<br />all in one place.</h2>
+                    <p>Attendance, grades, homework, news, chat &amp; schedule — seamlessly connected.</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-item"><i class="fas fa-calendar-check"></i> Schedule</div>
+                    <div class="feature-item"><i class="fas fa-users"></i> Groups &amp; Chat</div>
+                    <div class="feature-item"><i class="fas fa-book-open"></i> Library</div>
+                    <div class="feature-item"><i class="fas fa-chart-line"></i> Grades</div>
+                    <div class="feature-item"><i class="fas fa-newspaper"></i> News</div>
+                    <div class="feature-item"><i class="fas fa-tasks"></i> Homework</div>
+                </div>
+            </div>
+            <div class="footer-note">
+                <span>© 2026 SchoolPortal</span>
+                <span><i class="fas fa-shield-alt"></i> Secure · v2.0</span>
+            </div>
+        </div>
+        <div class="form-panel">
+            <div class="form-header">
+                <h1>Welcome back</h1>
+                <p>Log in to your account to continue</p>
+            </div>
+            <form id="loginForm" autocomplete="off" novalidate>
+                <div class="form-group">
+                    <label for="username"><i class="fas fa-user"></i> Username</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="username" placeholder="Enter your username" value="student1" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password"><i class="fas fa-lock"></i> Password</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" placeholder="Enter your password" value="demo123" required>
+                        <button type="button" class="toggle-pwd" id="togglePwd">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="role"><i class="fas fa-user-tag"></i> Login as</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-user-tag"></i>
+                        <select id="role">
+                            <option value="Student">Student</option>
+                            <option value="Teacher">Teacher</option>
+                            <option value="Redactor">Redactor</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-palette"></i> Theme</label>
+                    <div class="theme-selector" id="themeSelector">
+                        <div class="theme-chip active" data-theme="basic">
+                            <span class="color-dots">
+                                <span style="background:#ffffff;border:1px solid #ccc;"></span>
+                                <span style="background:#000000;"></span>
+                                <span style="background:#00008b;"></span>
+                            </span>
+                            Basic
+                            <span class="check-mark"><i class="fas fa-check-circle"></i></span>
+                        </div>
+                        <div class="theme-chip" data-theme="retro">
+                            <span class="color-dots">
+                                <span style="background:#008000;"></span>
+                                <span style="background:#000000;"></span>
+                                <span style="background:#00ff00;"></span>
+                            </span>
+                            Retro
+                            <span class="check-mark"><i class="fas fa-check-circle"></i></span>
+                        </div>
+                        <div class="theme-chip" data-theme="nature">
+                            <span class="color-dots">
+                                <span style="background:#87ceeb;"></span>
+                                <span style="background:#90ee90;"></span>
+                                <span style="background:#ffffff;border:1px solid #ccc;"></span>
+                                <span style="background:#000000;"></span>
+                            </span>
+                            Nature
+                            <span class="check-mark"><i class="fas fa-check-circle"></i></span>
+                        </div>
+                        <div class="theme-chip" data-theme="ocean">
+                            <span class="color-dots">
+                                <span style="background:#87ceeb;"></span>
+                                <span style="background:#4169e1;"></span>
+                                <span style="background:#ffffff;border:1px solid #ccc;"></span>
+                            </span>
+                            Ocean
+                            <span class="check-mark"><i class="fas fa-check-circle"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div id="errorMessage" class="error-message">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span id="errorText">Invalid username or password. Please try again.</span>
+                </div>
+                <button type="submit" class="login-btn" id="loginBtn">
+                    <span class="btn-text">Log In</span>
+                    <span class="spinner"></span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+            <div class="demo-credentials">
+                <h4><i class="fas fa-key"></i> Demo Credentials</h4>
+                <div class="cred-grid">
+                    <div class="cred-item"><strong>Student</strong> <span>student1 · demo123</span></div>
+                    <div class="cred-item"><strong>Teacher</strong> <span>teacher1 · demo123</span></div>
+                    <div class="cred-item"><strong>Redactor</strong> <span>admin · demo123</span></div>
+                </div>
+            </div>
+            <div class="register-link">
+                Don't have an account? <a href="#" id="contactAdmin">Contact Administrator</a>
+            </div>
+        </div>
+    </div>
+    <script src="page1.js"></script>
+</body>
+</html>

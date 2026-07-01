@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SchoolPortal — Complete System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="page2.css" />
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="logo-icon">
+            <i class="fas fa-graduation-cap"></i>
+        </div>
+        <nav class="nav-items" id="navItems">
+            <button class="nav-item active" data-page="dashboard">
+                <i class="fas fa-th-large"></i>
+                <span>Dashboard</span>
+            </button>
+            <button class="nav-item" data-page="homework-library">
+                <i class="fas fa-tasks"></i>
+                <span>Homework</span>
+                <span class="badge" id="hwBadge">3</span>
+            </button>
+            <button class="nav-item" data-page="schedule">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Schedule</span>
+            </button>
+            <button class="nav-item" data-page="attendance-grades">
+                <i class="fas fa-user-check"></i>
+                <span>Attendance</span>
+            </button>
+            <button class="nav-item" data-page="chats">
+                <i class="fas fa-comment-dots"></i>
+                <span>Chats</span>
+                <span class="badge" id="chatBadge">2</span>
+            </button>
+            <button class="nav-item" data-page="news">
+                <i class="fas fa-newspaper"></i>
+                <span>News</span>
+            </button>
+            <button class="nav-item hidden" data-page="admin" id="adminNav">
+                <i class="fas fa-user-cog"></i>
+                <span>Admin</span>
+            </button>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="user-avatar" id="userAvatar">JD</div>
+            <button class="logout-btn" id="logoutBtn" title="Logout">
+                <i class="fas fa-sign-out-alt"></i>
+            </button>
+        </div>
+    </aside>
+    <main class="main-content" id="mainContent">
+        <div class="top-bar">
+            <div class="greeting">
+                <h1>
+                    Welcome back, <span id="userName">John</span>
+                    <span class="role-badge-header" id="roleBadge">Student</span>
+                </h1>
+                <p id="userRoleDisplay">Class 1A</p>
+            </div>
+            <div class="actions">
+                <div class="date-display">
+                    <i class="fas fa-calendar-day"></i>
+                    <span id="currentDate">Loading...</span>
+                </div>
+            </div>
+        </div>
+        <div class="page-container">
+            <div class="page-panel active" id="page-dashboard">
+                <div class="dashboard-grid">
+                    <div class="left-col">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-newspaper"></i> Latest News</h3>
+                                <span class="view-all" onclick="navigateTo('news')">View all →</span>
+                            </div>
+                            <div id="newsFeed"></div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-calendar-check"></i> This Week's Events</h3>
+                                <span class="view-all" onclick="navigateTo('schedule')">View all →</span>
+                            </div>
+                            <div id="eventsFeed"></div>
+                        </div>
+                    </div>
+                    <div class="right-col">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-tasks"></i> Recent Homework</h3>
+                                <span class="view-all" onclick="navigateTo('homework-library')">View all →</span>
+                            </div>
+                            <div id="hwFeed"></div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-comment-dots"></i> Recent Chats</h3>
+                                <span class="view-all" onclick="navigateTo('chats')">View all →</span>
+                            </div>
+                            <div class="chat-list" id="chatFeed"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-panel" id="page-homework-library">
+                <!-- Add Homework (Teachers & Redactors) -->
+                <div id="addHomeworkSection" class="card" style="margin-bottom:1.5rem;display:none;">
+                    <h4 style="margin-bottom:1rem;color:#e2e8f0;"><i class="fas fa-plus-circle"></i> Add Homework</h4>
+                    <div style="display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:1rem;align-items:end;">
+                        <div class="form-group">
+                            <label style="display:block;font-size:0.8rem;color:#94a3b8;margin-bottom:4px;">Title</label>
+                            <input type="text" id="hwTitle" placeholder="Homework title" style="width:100%;padding:0.6rem;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);color:#f1f5f9;">
+                        </div>
+                        <div class="form-group">
+                            <label style="display:block;font-size:0.8rem;color:#94a3b8;margin-bottom:4px;">Description</label>
+                            <input type="text" id="hwDesc" placeholder="Description" style="width:100%;padding:0.6rem;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);color:#f1f5f9;">
+                        </div>
+                        <div class="form-group">
+                            <label style="display:block;font-size:0.8rem;color:#94a3b8;margin-bottom:4px;">Class</label>
+                            <select id="hwClass" style="width:100%;padding:0.6rem;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);color:#f1f5f9;">
+                                <option value="">Select Class</option>
+                            </select>
+                        </div>
+                        <div>
+                            <button onclick="addHomework()" class="btn-primary"><i class="fas fa-plus"></i> Add</button>
+                        </div>
+                    </div>
+                    <div id="hwMessage" class="message"></div>
+                </div>
+                <div id="addLibrarySection" class="card" style="margin-bottom:1.5rem;display:none;">
+                    <h4 style="margin-bottom:1rem;color:#e2e8f0;"><i class="fas fa-plus-circle"></i> Add Library Material</h4>
+                    <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:1rem;align-items:end;">
+                        <div class="form-group">
+                            <label style="display:block;font-size:0.8rem;color:#94a3b8;margin-bottom:4px;">Title</label>
+                            <input type="text" id="libTitle" placeholder="Material title" style="width:100%;padding:0.6rem;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);color:#f1f5f9;">
+                        </div>
+                        <div class="form-group">
+                            <label style="display:block;font-size:0.8rem;color:#94a3b8;margin-bottom:4px;">Description</label>
+                            <input type="text" id="libDesc" placeholder="Description" style="width:100%;padding:0.6rem;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);color:#f1f5f9;">
+                        </div>
+                        <div>
+                            <button onclick="addLibraryMaterial()" class="btn-primary"><i class="fas fa-plus"></i> Add</button>
+                        </div>
+                    </div>
+                    <div id="libMessage" class="message"></div>
+                </div>
+                <div class="tabs" style="display:flex;gap:1rem;margin-bottom:1.5rem;border-bottom:1px solid rgba(255,255,255,0.06);padding-bottom:0.5rem;">
+                    <button class="tab-btn active" data-tab="homework" onclick="switchTab('homework')" style="background:none;border:none;color:#e2e8f0;cursor:pointer;font-weight:600;padding:0.5rem 1rem;font-family:inherit;transition:0.3s;">Homework</button>
+                    <button class="tab-btn" data-tab="library" onclick="switchTab('library')" style="background:none;border:none;color:#64748b;cursor:pointer;font-weight:600;padding:0.5rem 1rem;font-family:inherit;transition:0.3s;">Library</button>
+                </div>
+                <div id="homeworkTab">
+                    <div class="hw-grid" id="homeworkGrid"></div>
+                </div>
+                <div id="libraryTab" style="display:none;">
+                    <div class="library-grid" id="libraryGrid"></div>
+                </div>
+            </div>
+            <div class="page-panel" id="page-schedule">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-calendar-alt"></i> Weekly Schedule</h3>
+                        <span style="font-size:0.8rem;color:#64748b;" id="scheduleWeek">Week of May 10, 2026</span>
+                    </div>
+                    <div id="scheduleGrid" class="schedule-grid"></div>
+                </div>
+                <div id="addLessonSection" class="card" style="margin-top:1.5rem;display:none;">
+                    <h4 style="margin-bottom:1rem;color:#e2e8f0;"><i class="fas fa-plus-circle"></i> Add Lesson</h4>
+                    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr auto;gap:1rem;align-items:end;">
+                        <div class="form-group">
+                            <label style="display:block;font-size:0.8rem;color:#94a3b8;margin-bottom:4px;">Subject</label>
+                            <input type="text" id="lessonSubject" placeholder="Subject" style="width:100%;padding:0.6rem;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);color:#f1f5f9;">
+                        </div>
+                        <div class="form-group">
+                            <label style="display:block;font-size:0.8rem;color:#94a3b8;margin-bottom:4px;">Class</label>
+                            <select id="lessonClass" style="width:100%;padding:0.6rem;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);color:#f1f5f9;">
+                                <option value="">Select Class</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label style="display:block;font-size:0.8rem;color:#94a3b8;margin-bottom:4px;">Day</label>
+                            <select id="lessonDay" style="width:100%;padding:0.6rem;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);color:#f1f5f9;">
+                                <option value="0">Sunday</option>
+                                <option value="1">Monday</option>
+                                <option value="2">Tuesday</option>
+                                <option value="3">Wednesday</option>
+                                <option value="4">Thursday</option>
+                                <option value="5">Friday</option>
+                                <option value="6">Saturday</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label style="display:block;font-size:0.8rem;color:#94a3b8;margin-bottom:4px;">Time</label>
+                            <input type="time" id="lessonTime" value="09:00" style="width:100%;padding:0.6rem;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);color:#f1f5f9;">
+                        </div>
+                        <div>
+                            <button onclick="addLesson()" class="btn-primary"><i class="fas fa-plus"></i> Add</button>
+                        </div>
+                    </div>
+                    <div id="lessonMessage" class="message"></div>
+                </div>
+            </div>
+            <div class="page-panel" id="page-attendance-grades">
+                <div class="card" style="margin-bottom:1.5rem;">
+                    <div class="card-header">
+                        <h3><i class="fas fa-user-check"></i> Attendance & Grades</h3>
+                        <div style="display:flex;gap:1rem;align-items:center;">
+                            <span style="font-size:0.8rem;color:#64748b;" id="attendanceClassDisplay">Select a class</span>
+                            <input type="date" id="attendanceDate" style="padding:0.3rem 0.6rem;border-radius:6px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);color:#f1f5f9;">
+                        </div>
+                    </div>
+                </div>
+                <div id="attendanceGrid" class="attendance-grid"></div>
+            </div>
+            <div class="page-panel" id="page-chats">
+                <div class="card" style="margin-bottom:1.5rem;">
+                    <div class="card-header">
+                        <h3><i class="fas fa-comment-dots"></i> Class Chats</h3>
+                        <span style="font-size:0.8rem;color:#64748b;" id="chatClassDisplay">Select a chat to view messages</span>
+                    </div>
+                </div>
+                <div class="chat-list" id="chatGroupsList"></div>
+            </div>
+            <div class="page-panel" id="page-news">
+                <div id="addNewsSection" class="card" style="margin-bottom:1.5rem;display:none;">
+                    <h4 style="margin-bottom:1rem;color:#e2e8f0;"><i class="fas fa-plus-circle"></i> Add News</h4>
+                    <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:1rem;align-items:end;">
+                        <div class="form-group">
+                            <label style="display:block;font-size:0.8rem;color:#94a3b8;margin-bottom:4px;">Title</label>
+                            <input type="text" id="newsTitle" placeholder="News title" style="width:100%;padding:0.6rem;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);color:#f1f5f9;">
+                        </div>
+                        <div class="form-group">
+                            <label style="display:block;font-size:0.8rem;color:#94a3b8;margin-bottom:4px;">Content</label>
+                            <input type="text" id="newsContent" placeholder="News content" style="width:100%;padding:0.6rem;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);color:#f1f5f9;">
+                        </div>
+                        <div>
+                            <button onclick="addNews()" class="btn-primary"><i class="fas fa-plus"></i> Add</button>
+                        </div>
+                    </div>
+                    <div id="newsMessage" class="message"></div>
+                </div>
+                <div id="newsList"></div>
+            </div>
+            <div class="page-panel" id="page-admin">
+                <div class="card" style="margin-bottom:1.5rem;">
+                    <div class="card-header">
+                        <h3><i class="fas fa-user-cog"></i> User Management <span class="admin-badge">Admin Only</span></h3>
+                        <span style="font-size:0.8rem;color:#64748b;">Manage users and classes</span>
+                    </div>
+                </div>
+                <div class="card" style="margin-bottom:1.5rem;">
+                    <h4 style="margin-bottom:1rem;color:#e2e8f0;"><i class="fas fa-user-plus"></i> Add New User</h4>
+                    <form id="addUserForm" class="admin-form-grid">
+                        <div class="form-group">
+                            <label for="newUsername">Username</label>
+                            <input type="text" id="newUsername" placeholder="Username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newPassword">Password</label>
+                            <input type="text" id="newPassword" placeholder="Password" value="demo123" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newRole">Role</label>
+                            <select id="newRole">
+                                <option value="Student">Student</option>
+                                <option value="Teacher">Teacher</option>
+                                <option value="Redactor">Redactor</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="newClass">Class (Students)</label>
+                            <select id="newClass">
+                                <option value="">N/A</option>
+                            </select>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn-primary"><i class="fas fa-plus"></i> Add</button>
+                        </div>
+                    </form>
+                    <div id="addUserMessage" class="message"></div>
+                </div>
+                <div class="card" style="margin-bottom:1.5rem;">
+                    <h4 style="margin-bottom:1rem;color:#e2e8f0;"><i class="fas fa-school"></i> Manage Classes</h4>
+                    <div style="display:flex;gap:0.5rem;margin-bottom:1rem;">
+                        <input type="text" id="newClassName" placeholder="New class name" style="flex:1;padding:0.6rem;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);color:#f1f5f9;">
+                        <button onclick="addClass()" class="btn-primary"><i class="fas fa-plus"></i> Add</button>
+                    </div>
+                    <div id="classList" style="display:flex;flex-wrap:wrap;gap:8px;"></div>
+                    <div id="classMessage" class="message"></div>
+                </div>
+                <div class="card">
+                    <h4 style="margin-bottom:1rem;color:#e2e8f0;"><i class="fas fa-users"></i> All Users</h4>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Username</th>
+                                    <th>Role</th>
+                                    <th>Class</th>
+                                    <th style="text-align:right;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="userTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div id="chatModal" class="chat-modal">
+        <div class="chat-modal-content">
+            <div class="chat-modal-header">
+                <h3 id="chatModalTitle">Chat</h3>
+                <button class="close-chat" onclick="closeChatModal()">&times;</button>
+            </div>
+            <div class="chat-messages" id="chatMessages"></div>
+            <div class="chat-input-area">
+                <input type="text" id="chatInput" placeholder="Type your message..." onkeypress="if(event.key==='Enter') sendChatMessage()">
+                <button onclick="sendChatMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+    <script src="page2.js"></script>
+</body>
+</html>
